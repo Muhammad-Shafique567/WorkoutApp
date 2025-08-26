@@ -38,11 +38,44 @@ const createWorkout = async (req, res) => {
 }
 
 //DELETE a workout
+const deleteWorkout = async (req, res) => {
+    const {id} = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Workout not found'})
+    }
+
+    const workout = await Workout.findOneAndDelete({_id: id}) //MongoDB id is named _id
+
+    if (!workout) {
+        return res.status(404).json({error: 'Workout not found'}) 
+    }
+
+    res.status(200).json(workout)
+}
 
 //UPDATE a workout
+
+const updateWorkout = async (req,res) => {
+    const {id} = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Workout not found'})
+    }
+
+    const workout = await Workout.findOneAndUpdate({_id: id}, {
+        ...req.body //spread operator to get all the fields from the request body and put them in workout variable
+    })
+
+    if (!workout) {
+        return res.status(404).json({error: 'Workout not found'}) 
+    }
+
+    res.status(200).json(workout)
+}
 
 module.exports = {
     createWorkout,
     getWorkouts,
-    getWorkout
+    getWorkout,
+    deleteWorkout,
+    updateWorkout
 }
