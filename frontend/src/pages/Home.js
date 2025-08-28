@@ -19,7 +19,7 @@ const Home = () => {
         }
 
         fetchWorkouts()
-    }, [])
+    }, []) //runs only once since dependency array is empty
 
     return (
         <div className="home">
