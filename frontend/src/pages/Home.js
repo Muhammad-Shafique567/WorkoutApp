@@ -19,7 +19,7 @@ const Home = () => {
         }
 
         fetchWorkouts()
-    }, []) //runs only once since dependency array is empty
+    }, [dispatch]) //when dispatch changes, useEffect will run again (to avoid warning in console)
 
     return (
         <div className="home">
