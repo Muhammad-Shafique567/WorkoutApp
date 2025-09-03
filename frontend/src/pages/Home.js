@@ -13,7 +13,7 @@ const Home = () => {
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch(`${API_URL}/api/workouts`);
+            const response = await fetch("https://workoutapp-ps3e.onrender.com/api/workout");
             const jsonData = await response.json() //convert response to json
 
             if (response.ok) {
