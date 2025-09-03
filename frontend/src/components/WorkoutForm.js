@@ -9,6 +9,7 @@ const WorkoutForm = () => {
     const [weight, setWeight] = useState('')
     const [reps, setReps] = useState('')
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault() //prevent the default behavior of the form (which is to refresh the page)
@@ -26,8 +27,10 @@ const WorkoutForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
+            setEmptyFields([])
             setError(null)
             console.log('new workout added', json)
             setTitle('')
@@ -46,6 +49,7 @@ const WorkoutForm = () => {
                 type = "text"
                 onChange = {(e) => setTitle(e.target.value)} //event object e, get the value of the input field and set it to title state
                 value = {title}
+                className = {emptyFields.includes('title') ? 'error' : ''} //if title is in emptyFields array, add error class
             />
 
             <label>Weight (kg): </label>
@@ -53,6 +57,7 @@ const WorkoutForm = () => {
                 type = "number"
                 onChange = {(e) => setWeight(e.target.value)} //event object e, get the value of the input field and set it to title state
                 value = {weight}
+                className = {emptyFields.includes('weight') ? 'error' : ''} //if weight is in emptyFields array, add error class
             />
 
             <label>Reps: </label>
@@ -60,6 +65,7 @@ const WorkoutForm = () => {
                 type = "number"
                 onChange = {(e) => setReps(e.target.value)} //event object e, get the value of the input field and set it to title state
                 value = {reps}
+                className = {emptyFields.includes('reps') ? 'error' : ''} //if reps is in emptyFields array, add error class
             />
 
             <button>Add Workout</button>
