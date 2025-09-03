@@ -6,9 +6,9 @@ import { useWorkoutContext } from '../hooks/useWorkoutContext'
 import WorkoutDetails from '../components/WorkoutData'
 import WorkoutForm from '../components/WorkoutForm'
 
-const API_URL = process.env.REACT_APP_API_URL
 
 const Home = () => {
+    const API_URL = process.env.REACT_APP_API_URL
     const {workouts, dispatch} = useWorkoutContext()
 
     useEffect(() => {
