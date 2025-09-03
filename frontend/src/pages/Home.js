@@ -8,7 +8,7 @@ import WorkoutForm from '../components/WorkoutForm'
 
 
 const Home = () => {
-    const API_URL = process.env.API_URL
+    const API_URL = process.env.REACT_APP_API_URL; // Access the environment variable
     const {workouts, dispatch} = useWorkoutContext()
 
     useEffect(() => {
