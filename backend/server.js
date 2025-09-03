@@ -14,7 +14,12 @@ app.use(express.json())
 
 // allow requests from frontend
 app.use(cors({
-  origin: "https://workout-app-plum.vercel.app", 
+  origin: 
+  [
+    "https://workout-app-plum.vercel.app", 
+    "https://workout-mbr5y259u-muhammad-shafique567s-projects.vercel.app"
+  ],
+
   credentials: true
 }))
 
