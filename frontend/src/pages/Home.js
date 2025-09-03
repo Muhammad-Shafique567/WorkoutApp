@@ -1,17 +1,19 @@
 import {useEffect} from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext'
-const API_URL = process.env.REACT_APP_API_URL
+
 
 //components
 import WorkoutDetails from '../components/WorkoutData'
 import WorkoutForm from '../components/WorkoutForm'
+
+const API_URL = process.env.REACT_APP_API_URL
 
 const Home = () => {
     const {workouts, dispatch} = useWorkoutContext()
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch('${API_URL}/api/workouts') //fetch data from backend and store in reponse
+            const response = await fetch(`${API_URL}/api/workouts`);
             const jsonData = await response.json() //convert response to json
 
             if (response.ok) {
