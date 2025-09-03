@@ -26,7 +26,7 @@ export const WorkoutsContextProvider = ({children}) => {
 
     return (
         //Since children represents the entire app, everything inside the app will have access to state and dispatch
-        <WorkoutsContext.Provider value={{state, dispatch}}>
+        <WorkoutsContext.Provider value={{...state, dispatch}}>
             { children }
         </WorkoutsContext.Provider>
     )

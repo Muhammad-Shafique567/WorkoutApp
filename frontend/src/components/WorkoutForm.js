@@ -1,13 +1,17 @@
 import { useState } from 'react'
+import { useWorkoutContext } from '../hooks/useWorkoutContext'
+
 
 const WorkoutForm = () => {
+    const {dispatch} = useWorkoutContext()
+
     const [title, setTitle] = useState('')
     const [weight, setWeight] = useState('')
     const [reps, setReps] = useState('')
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault() //prevent the default behavior of the form (which is to refresh the page)
 
         const workout = {title, weight, reps}
 
@@ -29,6 +33,7 @@ const WorkoutForm = () => {
             setTitle('')
             setReps('')
             setWeight('')
+            dispatch({type: 'CREATE_WORKOUT', payload: json}) //dispatch action to add new workout to context state
         }
     }    
 
