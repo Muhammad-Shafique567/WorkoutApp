@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext'
-
+import { API_ENDPOINTS } from '../config/api'
 
 //components
 import WorkoutDetails from '../components/WorkoutData'
@@ -8,12 +8,11 @@ import WorkoutForm from '../components/WorkoutForm'
 
 
 const Home = () => {
-    const API_URL = process.env.REACT_APP_API_URL; // Access the environment variable
     const {workouts, dispatch} = useWorkoutContext()
 
     useEffect(() => {
         const fetchWorkouts = async () => {
-            const response = await fetch("https://workoutapp-ps3e.onrender.com/api/workout");
+            const response = await fetch(API_ENDPOINTS.WORKOUTS);
             const jsonData = await response.json() //convert response to json
 
             if (response.ok) {

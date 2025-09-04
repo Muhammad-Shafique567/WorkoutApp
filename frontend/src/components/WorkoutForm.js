@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext'
+import { API_ENDPOINTS } from '../config/api'
 
 
 const WorkoutForm = () => {
@@ -16,7 +17,7 @@ const WorkoutForm = () => {
 
         const workout = {title, weight, reps}
 
-        const response = await fetch('/api/workouts', {
+        const response = await fetch(API_ENDPOINTS.WORKOUTS, {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {
