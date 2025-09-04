@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useWorkoutContext } from '../hooks/useWorkoutContext'
 
-
 const WorkoutForm = () => {
     const {dispatch} = useWorkoutContext()
 
@@ -11,12 +10,14 @@ const WorkoutForm = () => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000' // fallback for local dev
+
     const handleSubmit = async (e) => {
-        e.preventDefault() //prevent the default behavior of the form (which is to refresh the page)
+        e.preventDefault()
 
         const workout = {title, weight, reps}
 
-        const response = await fetch('/api/workouts', {
+        const response = await fetch(`${API_URL}/api/workouts`, {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {
@@ -36,42 +37,42 @@ const WorkoutForm = () => {
             setTitle('')
             setReps('')
             setWeight('')
-            dispatch({type: 'CREATE_WORKOUT', payload: json}) //dispatch action to add new workout to context state
+            dispatch({type: 'CREATE_WORKOUT', payload: json})
         }
     }    
 
     return (
         <form className="create" onSubmit={handleSubmit}>
-        
             <h3>Add a New Workout</h3>
+
             <label>Exercise Title: </label>
             <input
-                type = "text"
-                onChange = {(e) => setTitle(e.target.value)} //event object e, get the value of the input field and set it to title state
-                value = {title}
-                className = {emptyFields.includes('title') ? 'error' : ''} //if title is in emptyFields array, add error class
+                type="text"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                className={emptyFields.includes('title') ? 'error' : ''}
             />
 
             <label>Weight (kg): </label>
             <input
-                type = "number"
-                onChange = {(e) => setWeight(e.target.value)} //event object e, get the value of the input field and set it to title state
-                value = {weight}
-                className = {emptyFields.includes('weight') ? 'error' : ''} //if weight is in emptyFields array, add error class
+                type="number"
+                onChange={(e) => setWeight(e.target.value)}
+                value={weight}
+                className={emptyFields.includes('weight') ? 'error' : ''}
             />
 
             <label>Reps: </label>
             <input
-                type = "number"
-                onChange = {(e) => setReps(e.target.value)} //event object e, get the value of the input field and set it to title state
-                value = {reps}
-                className = {emptyFields.includes('reps') ? 'error' : ''} //if reps is in emptyFields array, add error class
+                type="number"
+                onChange={(e) => setReps(e.target.value)}
+                value={reps}
+                className={emptyFields.includes('reps') ? 'error' : ''}
             />
 
             <button>Add Workout</button>
-            {error && <div className="error">{error}</div>} {/*render the error message if there is an error*/}
+            {error && <div className="error">{error}</div>}
         </form>
     )
 }
 
-export default WorkoutForm;
+export default WorkoutForm
