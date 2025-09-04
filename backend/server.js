@@ -1,42 +1,36 @@
 require('dotenv').config()
-
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 const workoutRoutes = require('./routes/workouts')
-const cors = require('cors')  //import cors
 
-//express app 
 const app = express()
 
-//middleware
-
-//Enable CORS
+// Enable CORS so the frontend can make requests
 app.use(cors({
     origin: 'https://workoutapp-1-8an2.onrender.com', // frontend URL
     methods: ['GET','POST','DELETE','PUT','PATCH'],
     credentials: true
 }))
 
-// 2Parse JSON
+// Parse JSON bodies
 app.use(express.json())
 
-// Logging middleware
+// Log incoming requests (for debugging)
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
 
-//routes
+// API routes
 app.use('/api/workouts', workoutRoutes)
 
-//connect to the database
+// Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        app.listen(process.env.PORT, () => {
-            console.log('Successfully connected to the database, listening for requests on port', process.env.PORT)
+        const port = process.env.PORT || 4000
+        app.listen(port, () => {
+            console.log('Backend running on port', port)
         })
     })
-    .catch((error) => {
-        console.log(error)
-    })
-
+    .catch(err => console.log(err))
