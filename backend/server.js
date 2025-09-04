@@ -16,6 +16,7 @@ app.use(express.json())
 app.use(cors({
   origin: 
   [
+    "http://localhost:3000", // for development
     "https://workout-app-plum.vercel.app", 
     "https://workout-mbr5y259u-muhammad-shafique567s-projects.vercel.app"
   ],
