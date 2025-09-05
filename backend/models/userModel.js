@@ -33,6 +33,7 @@ userSchema.statics.signup = async function(email, password) { //cannot use arrow
     }
 
     const exists = await this.findOne({ email })
+
     if (exists) {
         throw Error('Email already in use')
     }
@@ -41,6 +42,27 @@ userSchema.statics.signup = async function(email, password) { //cannot use arrow
     const hashedPassword = await brcrypt.hash(password, salt)
 
     const user = await this.create({email, password: hashedPassword})
+    return user
+}
+
+//static login method
+userSchema.statics.login = async function(email, password) {
+    if (!email || !password) {
+        throw Error('All fields must be filled')
+    }
+
+    const user = await this.findOne({ email })
+
+    if (!user) {
+        throw Error('Invalid login')
+    }
+
+    const match = await brcrypt.compare(password, user.password)
+    
+    if (!match) {
+        throw Error('Invalid login')
+    }
+
     return user
 }
 
