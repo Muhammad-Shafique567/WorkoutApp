@@ -7,7 +7,7 @@ const WorkoutDetails = ({ workout }) => {
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000' // fallback for local dev
 
     const handleClick = async () => {
-        const response = await fetch(`${API_URL}/api/workouts/${workout._id}`, {
+        const response = await fetch(`/api/workouts/` + workout._id, {
             method: 'DELETE'
         })
         const json = await response.json()

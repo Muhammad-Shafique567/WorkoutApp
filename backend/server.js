@@ -3,8 +3,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const workoutRoutes = require('./routes/workouts')
+const userRoutes = require('./routes/user')
 
 const app = express()
+
 
 // Enable CORS so the frontend can make requests
 app.use(cors({
@@ -13,10 +15,11 @@ app.use(cors({
     credentials: true
 }))
 
-// Parse JSON bodies
+
+// Middleware
 app.use(express.json())
 
-// Log incoming requests (for debugging)
+// Log incoming requests
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
@@ -24,6 +27,8 @@ app.use((req, res, next) => {
 
 // API routes
 app.use('/api/workouts', workoutRoutes)
+app.use('/api/user', userRoutes)
+
 
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGO_URI)
