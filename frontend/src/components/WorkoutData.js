@@ -6,14 +6,14 @@ const WorkoutDetails = ({ workout }) => {
     const { dispatch } = useWorkoutContext()
     const { user } = useAuthContext() //get user from auth context
 
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000' // fallback for local dev
+    const API_URL = process.env.REACT_APP_API_URL
 
     const handleClick = async () => {
         if (!user) {
             return
         }
 
-        const response = await fetch(`/api/workouts/` + workout._id, {
+        const response = await fetch(`${API_URL}/api/workouts/` + workout._id, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`  //Include JWT token in request headers for authentication

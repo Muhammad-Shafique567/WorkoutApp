@@ -11,7 +11,7 @@ const WorkoutForm = () => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000' // fallback for local dev
+    const API_URL = process.env.REACT_APP_API_URL
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -24,7 +24,7 @@ const WorkoutForm = () => {
 
         const workout = {title, weight, reps}
 
-        const response = await fetch(`/api/workouts`, {
+        const response = await fetch(`${API_URL}/api/workouts`, {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {

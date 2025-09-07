@@ -7,7 +7,6 @@ const userRoutes = require('./routes/user')
 
 const app = express()
 
-
 // Enable CORS so the frontend can make requests
 app.use(cors({
     origin: 'https://workoutapp-1-8an2.onrender.com', // frontend URL
