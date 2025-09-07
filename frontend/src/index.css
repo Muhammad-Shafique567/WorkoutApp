@@ -1,130 +1,233 @@
-/* google font */
+/* ===========================
+   Google Fonts
+=========================== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
+/* ===========================
+   Root Variables
+=========================== */
 :root {
-  --primary: #1aac83;
+  --primary: #1aac83;        /* Vibrant accent */
+  --primary-hover: #15996e;
   --error: #e7195a;
+  --bg-dark: #121212;        /* Main background */
+  --bg-card: #1e1e1e;        /* Cards/forms */
+  --text-light: #f1f1f1;     /* General text */
+  --text-muted: #aaa;        /* Subtle text */
+  --shadow: rgba(0, 0, 0, 0.5);
 }
+
+/* ===========================
+   Global Styles
+=========================== */
 body {
-  background: #f1f1f1;
   margin: 0;
-  font-family: "Poppins";
+  background: var(--bg-dark);
+  font-family: "Poppins", sans-serif;
+  color: var(--text-light);
+  line-height: 1.6;
 }
+
+a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* ===========================
+   Header
+=========================== */
 header {
-  background: #fff;
+  background: #1b1b1b;
+  box-shadow: 0 2px 6px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 header .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-header a {
-  color: #333;
-  text-decoration: none;
-}
-.pages{
-  max-width: 1400px;
-  padding: 20px;
-  margin: 0 auto;
+
+/* ===========================
+   Navbar
+=========================== */
+nav {
+  display: flex;
+  align-items: center;
 }
 
-/* homepage */
+nav a {
+  margin-left: 15px;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+nav button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-left: 15px;
+  border-radius: 6px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+nav button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+/* ===========================
+   Page Layout
+=========================== */
+.pages {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* ===========================
+   Homepage
+=========================== */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px;
+  gap: 50px;
 }
+
 .workout-details {
-  background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  background: var(--bg-card);
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 25px;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.workout-details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow);
+}
+
 .workout-details h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
+  margin: 0 0 12px 0;
+  font-size: 1.3em;
   color: var(--primary);
+  font-weight: 600;
 }
+
 .workout-details p {
   margin: 0;
-  font-size: 0.9em;
-  color: #555;
+  font-size: 1em;
+  color: var(--text-muted);
 }
+
 .workout-details span {
   position: absolute;
   top: 20px;
   right: 20px;
   cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
+  background: #333;
+  padding: 8px;
   border-radius: 50%;
-  color: #333;
+  color: var(--text-light);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* new workout form */
-label, input {
-  display: block;
-}
-input {
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-form button {
+.workout-details span:hover {
   background: var(--primary);
-  border: 0;
   color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
 }
-div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
+
+/* ===========================
+   Forms
+=========================== */
+label,
+input {
+  display: block;
+  color: var(--text-light);
 }
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: #1e1e1e;
+  color: var(--text-light);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(26, 172, 131, 0.3);
+  outline: none;
+}
+
 input.error {
   border: 1px solid var(--error);
 }
 
-/* navbar */
-nav {
-  display: flex;
-  align-items: center;
-}
-nav a {
-  margin-left: 10px;
-}
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins";
+form button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-family: "Poppins", sans-serif;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
+  width: 100%;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* auth forms */
-form.signup, form.login {
+form button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+div.error {
+  padding: 10px;
+  margin: 20px 0;
+  background: #330000;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* ===========================
+   Auth Forms
+=========================== */
+form.signup,
+form.login {
   max-width: 400px;
   margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 4px;
+  padding: 25px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+form.signup:hover,
+form.login:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px var(--shadow);
 }

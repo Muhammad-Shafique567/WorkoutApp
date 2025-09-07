@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 
 //GET all workouts
 const getWorkouts = async (req, res) => {
-    const workouts = await Workout.find({}).sort({createdAt: -1}) //find all workouts and sort by createdAt in descending order
+    const user_id = req.user._id //get user id from requireAuth middleware
+
+    const workouts = await Workout.find({ user_id }).sort({createdAt: -1}) //find all workouts and sort by createdAt in descending order only for the logged in user
     res.status(200).json(workouts) //response with status 200 and the workouts
 }
 
@@ -49,7 +51,8 @@ const createWorkout = async (req, res) => {
 
     //add document to database
     try {
-        const workout = await Workout.create({title, weight, reps})
+        const user_id = req.user._id //get user id from requireAuth middleware
+        const workout = await Workout.create({title, weight, reps, user_id}) //create new workout with title, weight, reps and user_id
         res.status(200).json(workout) //response with status 200 and the created workout
     } catch (error) {
         res.status(400).json({error: error.message}) //response with status 400 and the error message
