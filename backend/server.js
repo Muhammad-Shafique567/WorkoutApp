@@ -9,7 +9,7 @@ const app = express()
 
 // Enable CORS so the frontend can make requests
 app.use(cors({
-    origin: 'https://workoutapp-1-8an2.onrender.com', // frontend URL
+    origin: 'https://workoutapp-frontend-j4ve.onrender.com', // frontend URL
     methods: ['GET','POST','DELETE','PUT','PATCH'],
     credentials: true
 }))
